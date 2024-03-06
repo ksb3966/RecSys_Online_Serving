@@ -71,7 +71,7 @@ docker build -t web_single_example .
 ├── .dockerignore           # 도커 이미지 빌드 시 제외할 파일 목록
 ├── .gitignore              # git에서 제외할 파일 목록
 ├── Dockerfile              # 도커 이미지 빌드 설정 파일
-├── README_nlp.md           # 프로젝트 설명 파일
+├── README.md           # 프로젝트 설명 파일
 ├── __init__.py
 ├── api.py                  # API 엔드포인트 정의 파일
 ├── config.py               # Config 정의 파일
