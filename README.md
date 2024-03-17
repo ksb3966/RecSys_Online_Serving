@@ -1,65 +1,15 @@
 # RecSys Serving Example by FastAPI
-RecSys 모델을 Web Single Pattern 으로 구현하기 위해 FastAPI 를 사용합니다.
+Book Recommendation 프로젝트를 FastAPI를 활용, Single Web Server로 구축했습니다.  
+책 추천 서비스를 런칭할 때 사용할 수 있는 백엔드 차원에서의 BaseLine입니다.  
+서버를 띄운 뒤, Request를 요청하면 학습 및 추론을 진행 및 전체 유저 및 아이템에 대한 결과값을 csv로 리턴합니다.(data/scr/submit 디렉토리 저장)  
+현재 특정 유저에 대한 결과값만을 리턴하거나 도커로 구현하는 부분은 수정 단계에 있습니다.  
 
 ## Pre-requisites
-
 - Python >= 3.9
 - Poetry >= 1.1.4
 
-## Installation
-
-```bash
-poetry install
-```
-
-## Run
-환경 설정
-```bash
-# .env 
-# Default Baseline for DeepCoNN
-MODEL_PATH=./data/src/model_versions/deepconn_model.pt
-PYTHONPATH=
-```
-실행
-```bash
-poetry run python main.py
-```
-
-## Usage
-
-### Predict
-
-```bash
-curl -X POST "http://0.0.0.0:8000/predict" -H "Content-Type: application/json" -d '{"features": [5.1, 3.5, 1.4, 0.2]}'
-
-{"id":3,"result":0}
-```
-
-### Get all predictions
-
-```bash
-curl "http://0.0.0.0:8000/predict"
-
-[{"id":1,"result":0},{"id":2,"result":0},{"id":3,"result":0}]
-```
-
-### Get a prediction
-
-```bash
-curl "http://0.0.0.0:8000/predict/1"
-{"id":1,"result":0}
-```
-
-## Build
-
-```bash
-docker build -t web_single_example .
-```
-
 ## Project Structure
-
 ```bash
-.
 ├── /data                   # Data 관련 파일 및 코드
 │   └── /src                # input 파일 저장 경로
 │       ├── /images         # image input 파일 저장 경로
@@ -82,4 +32,30 @@ docker build -t web_single_example .
 ├── model.py                # 모델 관련 로직 파일
 ├── poetry.lock             # Poetry 라이브러리 버전 관리 파일
 └── pyproject.toml          # Poetry 프로젝트 설정 파일
+```
+
+## Installation
+
+```bash
+poetry install
+```
+
+## Run
+환경 설정
+```bash
+# .env 
+# Default Baseline for DeepCoNN
+MODEL_PATH=./data/src/model_versions/deepconn_model.pt
+```
+
+실행
+```bash
+poetry run python main.py
+```
+
+## Usage
+### Predict
+
+```bash
+curl -X POST "0.0.0.0:8000/scoring/context?model_type=wdn"
 ```
